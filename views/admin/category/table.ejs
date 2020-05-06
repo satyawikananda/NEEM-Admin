@@ -1,6 +1,8 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Add Category
+      </button>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -13,16 +15,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Rena ayuni</td>
-              <td>dsada</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Satya wikananda</td>
-              <td>dsada</td>
-            </tr>
+            <% for(let i = 0; i < category.length; i++){ %>
+              <tr>
+                <td><%= i + 1 %></td>
+                <td><%= category[i].name %></td>
+                <td>
+                  <a href="" class="btn btn-warning btn-circle btn-sm button-update" data-toggle="modal" data-target="#modalEditCategory" data-id="<%= category[i]._id %>" data-name="<%= category[i].name %>"><i class="fas fa-edit"></i></a>
+                  <a href="" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>
+                </td>
+              </tr>
+            <% } %>
           </tbody>
         </table>
       </div>
