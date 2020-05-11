@@ -1,11 +1,44 @@
 const Category = require('../models/Category.js')
-
+const Bank = require('../models/Bank.js')
 module.exports = {  
     viewDashboard: (req, res) => {
         res.render('admin/dashboard/view_dashboard', { title: "Admin | Dashboard" })
     },
-    viewBank: (req, res) => {
-        res.render('admin/bank/view_bank', { title: "Admin | Bank" })
+    viewBank: async (req, res) => {
+        try{
+            const bank = await Bank.find()
+            const alertMessage = req.flash('alertMessage')
+            const alertStatus = req.flash('alertStatus')
+            const alert = {
+                message: alertMessage,
+                status: alertStatus
+            }
+            res.render('admin/bank/view_bank', { title: "Admin | Bank", alert, bank })
+        }catch(error){
+            res.redirect('/admin/bank')
+        }
+    },
+    addBank: async (req, res) => {
+        try{
+            const {
+                nameBank,
+                nomorRekening,
+                name
+            } = req.body
+            await Bank.create({
+                nameBank,
+                nomorRekening,
+                name,
+                imageUrl: `images/${req.file.filename}`
+            })
+            req.flash('alertMessage', 'Successfully add bank')
+            req.flash('alertStatus', 'success')
+            res.redirect('/admin/bank')
+        }catch(error){
+            req.flash('alertMessage', 'Failed add category')
+            req.flash('alertStatus', 'danger')
+            console.log(error)
+        }
     },
     viewCategory: async (req, res) => {
         try {
