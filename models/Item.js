@@ -25,7 +25,8 @@ const itemSchema = new mongoose.Schema({
         required: true
     },
     isPopular: {
-        type: Boolean
+        type: Boolean,
+        default: false
     },
     categoryId: {
         type: ObjectId,
