@@ -1,12 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const adminController = require('../controllers/admin.controller')
+const dashboardController = require('../controllers/dashboard.controller')
 const bankController = require('../controllers/bank.controller')
 const categoryController = require('../controllers/category.controller')
+const itemController = require('../controllers/item.controller')
+const bookingController = require('../controllers/booking.controller')
 
 const { upload } = require('../middleware/multer.js')
 
-router.get('/dashboard', adminController.viewDashboard)
+// Dashboard Routing
+router.get('/dashboard', dashboardController.viewDashboard)
 
 // Category Routing
 router.get('/category', categoryController.viewCategory)
@@ -20,7 +23,10 @@ router.post('/bank', upload, bankController.addBank)
 router.put('/bank', upload, bankController.updateBank)
 router.delete('/bank/:id', upload, bankController.deleteBank)
 
-router.get('/item', adminController.viewItem)
-router.get('/booking', adminController.viewBooking)
+// Item Routing
+router.get('/item', itemController.viewItem)
+
+// Booking Routing
+router.get('/booking', bookingController.viewBooking)
 
 module.exports = router;
