@@ -10,6 +10,8 @@ router.post('/category', adminController.addCategory)
 router.put('/category', adminController.updateCategory)
 router.delete('/category/:id', adminController.deleteCategory)
 router.post('/bank', upload, adminController.addBank)
+router.put('/bank', upload, adminController.updateBank)
+router.delete('/bank/:id', upload, adminController.deleteBank)
 router.get('/item', adminController.viewItem)
 router.get('/booking', adminController.viewBooking)
 

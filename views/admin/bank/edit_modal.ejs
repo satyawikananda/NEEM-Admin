@@ -1,0 +1,37 @@
+<div class="modal fade" id="modalEditBank" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update Bank</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="POST" action="/admin/bank?_method=PUT" enctype="multipart/form-data">
+            <div class="modal-body">
+                <div class="form-group">
+                  <label for="bankInput">Name Bank</label>
+                  <input type="text" name="nameBank" class="form-control" id="nameBankEdit" placeholder="Input name bank" required>
+                </div>
+                <div class="form-group">
+                  <label for="bankInput">No rekening</label>
+                  <input type="text" name="nomorRekening" class="form-control" id="noRekEdit" placeholder="Input no rekening" required>
+                </div>
+                <div class="form-group">
+                  <label for="bankInput">Name</label>
+                  <input type="text" name="name" class="form-control" id="nameEdit" placeholder="Input name" required>
+                </div>
+                <div class="form-group">
+                  <label for="bankInput">Image</label>
+                  <input type="file" name="image" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" class="id" name="id">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Update data</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>

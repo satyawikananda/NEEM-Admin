@@ -28,8 +28,8 @@
                   <img src="http://localhost:3000/<%= bank[index].imageUrl %>" style="width: 100%;" alt=<%= bank[index].nameBank %>>
                 </td>
                 <td>
-                  <form action="/admin/category/<%= bank[index]._id %>?_method=DELETE" method="POST">
-                    <a href="" class="btn btn-warning btn-circle btn-sm button-update" data-toggle="modal" data-target="#modalEditBank" data-id="<%= bank[index]._id %>" data-name="<%= bank[index].name %>"><i class="fas fa-edit"></i></a>
+                  <form action="/admin/bank/<%= bank[index]._id %>?_method=DELETE" method="POST">
+                    <a href="" class="btn btn-warning btn-circle btn-sm button-update" data-toggle="modal" data-target="#modalEditBank" data-id="<%= bank[index]._id %>" data-name="<%= bank[index].name %>" data-bank="<%= bank[index].nameBank %>" data-rek="<%= bank[index].nomorRekening %>"><i class="fas fa-edit"></i></a>
                     <button type="submit" href="" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
                   </form>
                 </td>
@@ -40,5 +40,3 @@
       </div>
     </div>
   </div>
-
-  <%- include('./add_modal.ejs') %>
