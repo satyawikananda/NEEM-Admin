@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const {ObjectId} = new mongoose.Schema
+const { ObjectId } = mongoose.Schema
 
 const itemSchema = new mongoose.Schema({
     title: {
@@ -30,7 +30,7 @@ const itemSchema = new mongoose.Schema({
     },
     categoryId: {
         type: ObjectId,
-        ref: "Category"
+        ref: 'Category'
     },
     imageId: [{
         type: ObjectId,

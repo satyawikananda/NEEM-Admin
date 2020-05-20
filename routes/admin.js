@@ -6,7 +6,7 @@ const categoryController = require('../controllers/category.controller')
 const itemController = require('../controllers/item.controller')
 const bookingController = require('../controllers/booking.controller')
 
-const { upload } = require('../middleware/multer.js')
+const { uploadSingle, uploadMulti } = require('../middleware/multer.js')
 
 // Dashboard Routing
 router.get('/dashboard', dashboardController.viewDashboard)
@@ -19,12 +19,13 @@ router.delete('/category/:id', categoryController.deleteCategory)
 
 // Bank Routing
 router.get('/bank', bankController.viewBank)
-router.post('/bank', upload, bankController.addBank)
-router.put('/bank', upload, bankController.updateBank)
-router.delete('/bank/:id', upload, bankController.deleteBank)
+router.post('/bank', uploadSingle, bankController.addBank)
+router.put('/bank', uploadSingle, bankController.updateBank)
+router.delete('/bank/:id', uploadSingle, bankController.deleteBank)
 
 // Item Routing
 router.get('/item', itemController.viewItem)
+router.post('/item', uploadMulti, itemController.addItem)
 
 // Booking Routing
 router.get('/booking', bookingController.viewBooking)
