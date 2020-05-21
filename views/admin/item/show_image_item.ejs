@@ -1,0 +1,16 @@
+<div class="tab-pane fade show active" id="show-image" role="tabpanel" aria-labelledby="home-tab">
+    <div class="row">
+        <% for( let x = 0; x < item.imageId.length; x++ ) { %>
+        <div class="col-md-4">
+            <div class="card-deck">
+                <div class="card shadow mb-4 mt-3">
+                  <div class="card-body">
+                        <img src="http://localhost:3000/<%= item.imageId[x].imageUrl %>" style="width: 100%;display: block;" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+    <a href="/admin/item" class="btn btn-warning rounded mb-3">Back</a>
+  </div>

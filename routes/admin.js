@@ -25,6 +25,7 @@ router.delete('/bank/:id', uploadSingle, bankController.deleteBank)
 
 // Item Routing
 router.get('/item', itemController.viewItem)
+router.get('/item/show-image/:id', itemController.showImageItem)
 router.post('/item', uploadMulti, itemController.addItem)
 
 // Booking Routing

@@ -4,6 +4,16 @@ const Image = require('../models/Image')
 
 const viewItem = async (req, res) => {
     try {
+        const item = await Item.find()
+            .populate({
+                path: 'imageId',
+                select: 'id imageUrl'
+            })
+            .populate({
+                path: 'categoryId',
+                select: 'id name'
+            })
+        console.log(JSON.stringify(item, null, 2))
         const category = await Category.find()
         const alertMessage = req.flash('alertMessage')
         const alertStatus = req.flash('alertStatus')
@@ -14,7 +24,9 @@ const viewItem = async (req, res) => {
         res.render('admin/item/view_item', {
             title: "Admin | Item",
             category,
-            alert
+            item,
+            alert,
+            action: "view"
         })
     } catch (error) {
         req.flash('alertMessage', 'Something went wrong')
@@ -61,7 +73,42 @@ const addItem = async (req, res) => {
     }
 }
 
+const showImageItem = async (req,res) => {
+    try {
+        const {id} = req.params
+        const item = await Item.findOne({_id: id})
+            .populate({
+                path: 'imageId',
+                select: 'id imageUrl'
+            })
+        const category = await Category.find()
+        const alertMessage = req.flash('alertMessage')
+        const alertStatus = req.flash('alertStatus')
+        const alert = {
+            message: alertMessage,
+            status: alertStatus
+        }
+        res.render('admin/item/view_item', {
+            title: "Admin | Show image item",
+            category,
+            item,
+            alert,
+            action: 'showImg'
+        })
+    } catch (error) {
+        req.flash('alertMessage', 'Something went wrong')
+        req.flash('alertStatus', 'danger')
+        console.log(error)
+    }
+}
+
+const showSingleItem = async (req, res) => {
+
+}
+
 module.exports = {
     viewItem,
-    addItem
+    addItem,
+    showImageItem,
+    showSingleItem
 }

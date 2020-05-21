@@ -10,18 +10,29 @@
               <th>Price</th>
               <th>Country</th>
               <th>City</th>
+              <th>Category</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Blabla</td>
-              <td>20000</td>
-              <td>Indonesia</td>
-              <td>Denpasar</td>
-              <td>dsadas</td>
-            </tr>
+            <% for( let i = 0; i < item.length; i++ ) { %>
+              <tr>
+                <td><%= i+1 %></td>
+                <td><%= item[i].title %></td>
+                <td><%= item[i].price %></td>
+                <td><%= item[i].country %></td>
+                <td><%= item[i].city %></td>
+                <td><%= item[i].categoryId.name %></td>
+                <td>
+                  <form action="/admin/bank/<%= item[i]._id %>?_method=DELETE" method="POST">
+                    <a href="/admin/item/show-image/<%= item[i]._id %>" class="btn btn-info btn-circle btn-sm"><i class="fas fa-image"></i></a>
+                    <a href="javascript:void()" class="btn btn-warning btn-circle btn-sm button-update" data-id="<%= item[i]._id %>" data-title="<%= item[i].title %>"><i class="fas fa-edit"></i></a>
+                    <button type="submit" href="" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
+                    <a href="" class="btn btn-success btn-circle btn-sm"><i class="fas fa-plus"></i></a>
+                  </form>
+                </td>
+              </tr>
+            <% } %>
           </tbody>
         </table>
       </div>
