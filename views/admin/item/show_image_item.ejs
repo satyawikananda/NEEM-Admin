@@ -2,13 +2,11 @@
     <div class="row">
         <% for( let x = 0; x < item.imageId.length; x++ ) { %>
         <div class="col-md-4">
-            <div class="card-deck">
                 <div class="card shadow mb-4 mt-3">
                   <div class="card-body">
                         <img src="http://localhost:3000/<%= item.imageId[x].imageUrl %>" style="width: 100%;display: block;" alt="Image">
                     </div>
                 </div>
-            </div>
         </div>
         <% } %>
     </div>

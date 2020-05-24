@@ -28,6 +28,8 @@ router.get('/item', itemController.viewItem)
 router.get('/item/show-image/:id', itemController.showImageItem)
 router.get('/item/:id', itemController.showEditItem)
 router.post('/item', uploadMulti, itemController.addItem)
+router.put('/item/:id', uploadMulti, itemController.updateItem)
+router.delete('/item/:id', uploadMulti, itemController.deleteItem)
 
 // Booking Routing
 router.get('/booking', bookingController.viewBooking)

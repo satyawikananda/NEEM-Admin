@@ -1,6 +1,8 @@
 const Category = require('../models/Category')
 const Item = require('../models/Item.js')
 const Image = require('../models/Image')
+const fs = require('fs-extra')
+const path = require('path')
 
 const viewItem = async (req, res) => {
     try {
@@ -13,7 +15,6 @@ const viewItem = async (req, res) => {
                 path: 'categoryId',
                 select: 'id name'
             })
-        console.log(JSON.stringify(item, null, 2))
         const category = await Category.find()
         const alertMessage = req.flash('alertMessage')
         const alertStatus = req.flash('alertStatus')
@@ -110,11 +111,6 @@ const showEditItem = async (req, res) => {
                 path: 'imageId',
                 select: 'id imageUrl'
             })
-            .populate({
-                path: 'categoryId',
-                select: 'id name'
-            })
-        console.log(item)
         const category = await Category.find()
         const alertMessage = req.flash('alertMessage')
         const alertStatus = req.flash('alertStatus')
@@ -136,9 +132,95 @@ const showEditItem = async (req, res) => {
     }
 }
 
+const updateItem = async (req, res) => {
+    try {
+        const { id } = req.params
+        const {
+             categoryId,
+             title,
+             price,
+             city,
+             description
+         } = req.body
+        const item = await Item.findOne({_id: id})
+         .populate({
+             path: 'imageId',
+             select: 'id imageUrl'
+         })
+         .populate({
+             path: 'categoryId',
+             select: 'id name'
+         })
+         if(req.files.length > 0){
+             for(let i = 0; i < item.imageId.length; i++){
+                 const imageUpdate = await Image.findOne({_id: item.imageId[i]._id})
+                 await fs.unlink(path.join(`public/${imageUpdate.imageUrl}`))
+                 imageUpdate.imageUrl = `images/${req.files[i].filename}`
+                 await imageUpdate.save()
+             }
+             item.title = title
+             item.price = price
+             item.city = city
+             item.description = description
+             item.categoryId = categoryId
+             await item.save()
+             req.flash('alertMessage', 'Successfully edit item')
+             req.flash('alertStatus', 'success')
+             res.redirect('/admin/item')
+         }else{
+             item.title = title
+             item.price = price
+             item.city = city
+             item.description = description
+             item.categoryId = categoryId
+             await item.save()
+             req.flash('alertMessage', 'Successfully edit item')
+             req.flash('alertStatus', 'success')
+             res.redirect('/admin/item')
+         }
+    } catch (error) {
+     req.flash('alertMessage', `${error.message}`)
+     req.flash('alertStatus', 'danger')
+     res.redirect('/admin/item')
+     console.log(error)
+    }
+}
+
+const deleteItem = async (req, res) => {
+    try {
+        const { id } = req.params
+        const item = await Item.findOne({_id: id})
+         .populate('imageId')
+         for(let i = 0; i < item.imageId.length; i++){
+            Image.findOne({_id: item.imageId[i]._id})
+             .then( async (image) => {
+                 await fs.unlink(path.join(`public/${image.imageUrl}`))
+                 image.remove()
+             })
+             .catch((err) => {
+                req.flash('alertMessage', `${error.message}`)
+                req.flash('alertStatus', 'danger')
+                res.redirect('/admin/item')
+                console.log(error)
+             })
+         }
+         await item.remove()
+         req.flash('alertMessage', 'Successfully delete item')
+         req.flash('alertStatus', 'success')
+         res.redirect('/admin/item')
+    } catch (error) {
+        req.flash('alertMessage', `${error.message}`)
+        req.flash('alertStatus', 'danger')
+        res.redirect('/admin/item')
+        console.log(error)
+    }
+}
+
 module.exports = {
     viewItem,
     addItem,
     showImageItem,
-    showEditItem
+    showEditItem,
+    updateItem,
+    deleteItem
 }
