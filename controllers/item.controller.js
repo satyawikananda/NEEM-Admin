@@ -216,11 +216,33 @@ const deleteItem = async (req, res) => {
     }
 }
 
+const viewDetailItem = async (req, res) => {
+    const { itemId } = req.params
+    try {
+        const alertMessage = req.flash('alertMessage')
+        const alertStatus = req.flash('alertStatus')
+        const alert = {
+            message: alertMessage,
+            status: alertStatus
+        }
+        res.render('admin/item/detail_item/view_detail_item', {
+            title: "Admin | Detail item",
+            alert
+        })
+    } catch (error) {
+        req.flash('alertMessage', `${error.message}`)
+        req.flash('alertStatus', 'danger')
+        res.redirect(`/admin/item/show-detail-item/${itemId}`)
+        console.log(error)
+    }
+}
+
 module.exports = {
     viewItem,
     addItem,
     showImageItem,
     showEditItem,
     updateItem,
-    deleteItem
+    deleteItem,
+    viewDetailItem
 }

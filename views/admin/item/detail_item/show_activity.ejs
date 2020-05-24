@@ -1,0 +1,43 @@
+<div class="tab-pane fade show active" id="show-activity" role="tabpanel" aria-labelledby="home-tab">
+    <div class="card shadow mb-4 mt-3">
+      <div class="card-body">
+        <div class="row">
+            <div class="col-md-5 col-sm-12">
+                <form method="POST" action="/admin/bank" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="bankInput">Name</label>
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Input name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bankInput">Type</label>
+                        <input type="number" name="type" class="form-control" id="type" placeholder="Input Type" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bankInput">Image</label>
+                        <input type="file" name="imageUrl" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </form>
+            </div>
+            <div class="col-md-7 col-sm-12">
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTableActivity" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Name feature</th>
+                        <th>Type</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
