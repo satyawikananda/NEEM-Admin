@@ -5,6 +5,7 @@ const bankController = require('../controllers/bank.controller')
 const categoryController = require('../controllers/category.controller')
 const itemController = require('../controllers/item.controller')
 const bookingController = require('../controllers/booking.controller')
+const featureController = require('../controllers/feature.controller')
 
 const { uploadSingle, uploadMulti } = require('../middleware/multer.js')
 
@@ -33,7 +34,7 @@ router.put('/item/:id', uploadMulti, itemController.updateItem)
 router.delete('/item/:id', uploadMulti, itemController.deleteItem)
 
 // Feature routing
-router.post('/item/addFeature', uploadSingle, itemController.addFeature)
+router.post('/item/add-feature', uploadSingle, featureController.addFeature)
 
 // Booking Routing
 router.get('/booking', bookingController.viewBooking)
