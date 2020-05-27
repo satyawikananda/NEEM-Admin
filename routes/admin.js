@@ -32,6 +32,9 @@ router.post('/item', uploadMulti, itemController.addItem)
 router.put('/item/:id', uploadMulti, itemController.updateItem)
 router.delete('/item/:id', uploadMulti, itemController.deleteItem)
 
+// Feature routing
+router.post('/item/addFeature', uploadSingle, itemController.addFeature)
+
 // Booking Routing
 router.get('/booking', bookingController.viewBooking)
 

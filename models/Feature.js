@@ -8,12 +8,11 @@ const featureSchema = new mongoose.Schema({
     },
     qty: {
         type: Number,
-        required: true,
-        min: [1, 'Cannot less than one qty']
+        required: true
     },
     imageUrl: {
         type: String,
-        required: true
+        required: true,
     },
     itemId: {
         type: ObjectId,
