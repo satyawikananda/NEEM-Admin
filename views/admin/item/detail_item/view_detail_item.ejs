@@ -55,9 +55,19 @@
   </div>
 
   <%- include('../../../partials/js.ejs') %>
+  <%- include('./show_modal_feature.ejs') %>
   <script>
     $(document).ready(function(){
       $('#dataTableActivity').DataTable()
+
+      $('#dataTable').on('click','.button-update', function(){
+      let id = $(this).data('id')
+      let name = $(this).data('name')
+      let qty = $(this).data('qty')
+      $('.id').val(id)
+      $('#nameFitur').val(name)
+      $('#qtyFitur').val(qty)
+    })
     })
     CKEDITOR.replace('description')
   </script>
