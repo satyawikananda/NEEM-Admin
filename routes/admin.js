@@ -26,7 +26,6 @@ router.delete('/bank/:id', uploadSingle, bankController.deleteBank)
 
 // Item Routing
 router.get('/item', itemController.viewItem)
-router.get('/item/show-detail-item/:itemId', itemController.viewDetailItem)
 router.get('/item/show-image/:id', itemController.showImageItem)
 router.get('/item/:id', itemController.showEditItem)
 router.post('/item', uploadMulti, itemController.addItem)
@@ -35,6 +34,7 @@ router.delete('/item/:id', uploadMulti, itemController.deleteItem)
 
 // Feature routing
 router.post('/item/add-feature', uploadSingle, featureController.addFeature)
+router.get('/item/show-detail-item/:itemId', featureController.viewDetailItem)
 
 // Booking Routing
 router.get('/booking', bookingController.viewBooking)
