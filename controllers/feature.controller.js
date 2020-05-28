@@ -9,10 +9,14 @@ const viewDetailItem = async (req, res) => {
             message: alertMessage,
             status: alertStatus
         }
+        const feature = await Feature.find({
+            itemId: itemId
+        })
         res.render('admin/item/detail_item/view_detail_item', {
             title: "Admin | Detail item",
             alert,
-            itemId
+            itemId,
+            feature
         })
     } catch (error) {
         req.flash('alertMessage', `${error.message}`)
